@@ -116,10 +116,31 @@
 **Instructor Resources:**
 - [Video : Robot Navigation with Nav2 and ROS (Video)](https://youtu.be/jkoGkAd0GYk?si=Y75rRRf4oD62-eJV)
 
+---
+
+### **Session 8: Computer Vision with OpenCV**
+**Goals:**
+- Master OpenCV fundamentals in Python
+- Implement person detection using HOG descriptors
+- Process real-time video streams
+
+**Instructor Resources:**
+- Color space conversions (RGB, BGR, Grayscale, HSV, L*a*b) - [1:12:53](https://www.youtube.com/watch?v=oXlwWbU8l2o&t=4373s)
+- Channel splitting and merging - [1:23:10](https://www.youtube.com/watch?v=oXlwWbU8l2o&t=4990s)
+- Image blurring techniques - [1:31:03](https://www.youtube.com/watch?v=oXlwWbU8l2o&t=5463s)
+- Bitwise operations - [1:44:27](https://www.youtube.com/watch?v=oXlwWbU8l2o&t=6267s)
+- Image masking - [1:53:06](https://www.youtube.com/watch?v=oXlwWbU8l2o&t=6786s)
+- Histogram computation - [2:01:43](https://www.youtube.com/watch?v=oXlwWbU8l2o&t=7303s)
+- Thresholding and binarization - [2:15:22](https://www.youtube.com/watch?v=oXlwWbU8l2o&t=8122s)
+- Advanced edge detection - [2:26:27](https://www.youtube.com/watch?v=oXlwWbU8l2o&t=8787s)
+
+- [HOG Detection with OpenCV (Video)](https://www.youtube.com/watch?v=UQRW4B4_nmU)
+
 
 ---
 
-### **Session 8: ROS 2 Computer Vision Integration**
+
+### **Session 9: ROS 2 Computer Vision Integration**
 **Goals:**
 - Create image subscriber with OpenCV processing pipeline
 - Implement real-time video processing node
@@ -134,7 +155,7 @@
 
 ---
 
-### **Session 9-10: Introduction to Reinforcement Learning**
+### **Session 10: Introduction to Reinforcement Learning**
 **Goals:**
 - Understand reinforcement learning fundamentals
 - Train lunar lander agent using reinforcement learning
@@ -143,10 +164,7 @@
 **Instructor Resources:**
 - [Lunar Lander Theory (Coursera)](https://www.coursera.org/learn/unsupervised-learning-recommenders-reinforcement-learning/lecture/C9BJf/lunar-lander)
 - [Lunar Lander Implementation (GitHub)](https://github.com/greyhatguy007/Machine-Learning-Specialization-Coursera/blob/main/C3%20-%20Unsupervised%20Learning%2C%20Recommenders%2C%20Reinforcement%20Learning/week3/C3W3A1/C3_W3_A1_Assignment.ipynb)
-
-
 - [Video : Intro to Reinforcement Learning for Beginners in Python](https://youtu.be/Uc6qBg7mM2Y?si=I_DrdM6N2FauNrbb)
-- [Video : Creating A Reinforcement Learning (RL) Environment](https://youtu.be/G92TF4xYQcU?si=JTDKRsBqqolu3hzs)
 
 ---
 
