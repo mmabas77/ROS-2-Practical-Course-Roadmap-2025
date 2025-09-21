@@ -93,6 +93,9 @@
 **Instructor Resources:**
 - [Official Docs](https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/)
 - [Video : Getting Started with TurtleBot3 in ROS](https://youtu.be/e-7SlNDh8A8?si=2L79nas9mMkgUDcL)
+- OR
+- [Video : How to use Cameras in ROS (Add camera to the bot)](https://youtu.be/A3nw2M47K50?si=PA1_Z_GUaTtkPCXh)
+- [Video : How to use Lidar in ROS](https://youtu.be/eJZXRncGaGM?si=n-MrKUWUJYSEjMrS)
 
 ---
 
@@ -104,6 +107,7 @@
 
 **Instructor Resources:**
 - [Video : Easy SLAM with ROS using slam_toolbox (Video)](https://youtu.be/ZaiA3hWaRzE?si=02UikckogA1UmWMv)
+- [TurtleBot3 Camera and LiDAR Scan](https://youtu.be/3hswO5bAIK4?si=nP-mHU7tPEW4N1Ea)
 
 ---
 
