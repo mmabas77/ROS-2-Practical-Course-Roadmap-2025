@@ -140,6 +140,8 @@
 
 - [HOG Detection with OpenCV (Video)](https://www.youtube.com/watch?v=UQRW4B4_nmU)
 
+- [Camera Calibration using OpenCV](https://learnopencv.com/camera-calibration-using-opencv/)
+
 
 ---
 
