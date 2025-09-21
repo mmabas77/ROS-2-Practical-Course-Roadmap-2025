@@ -130,6 +130,7 @@
 - [TurtleBot3 Object Following (GitHub)](https://github.com/emirhancibir/turtlebot3_object_following)
 - [TurtleBot3 Person Following (GitHub)](https://github.com/mmabas77/ros_ws)
 - [Video : HOG Detection with OpenCV](https://www.youtube.com/watch?v=UQRW4B4_nmU)
+- [Video : Chase a tennis ball with ROS](https://youtu.be/gISSSbYUZag?si=j64B1IBVucElRDiO)
 
 ---
 
