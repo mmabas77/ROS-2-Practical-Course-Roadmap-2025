@@ -84,6 +84,9 @@
 - [Video : Creating a rough 3D model of our robot with URDF](https://youtu.be/BcjHyhV0kIs?si=CAZnlBHa6--odYt-)
 
 ---
+### **Task-1**
+- Design your own world & BOT (You can import Turtlebot3) - Use Teleopkeys to move the bot.
+---
 
 ### **Session 5: Robot Control & Sensor Integration**
 **Goals:**
@@ -122,6 +125,9 @@
 - [Video : Robot Navigation with Nav2 and ROS (Video)](https://youtu.be/jkoGkAd0GYk?si=Y75rRRf4oD62-eJV)
 
 ---
+### **Task-2**
+- Build an autonomous obstacle avoidance bot (Use your own world and BOT or TurtleBot3)
+---
 
 ### **Session 8: Computer Vision with OpenCV**
 **Goals:**
@@ -145,6 +151,8 @@
 
 
 ---
+### **Quiz: On OpenCV**
+---
 
 
 ### **Session 9: ROS 2 Computer Vision Integration**
@@ -160,6 +168,9 @@
 - [Video : HOG Detection with OpenCV](https://www.youtube.com/watch?v=UQRW4B4_nmU)
 - [Video : Chase a tennis ball with ROS](https://youtu.be/gISSSbYUZag?si=j64B1IBVucElRDiO)
 
+---
+### **Task-3**
+- Build an autonomous obstacle avoidance bot that follows a person
 ---
 
 ### **Session 10: Introduction to Reinforcement Learning**
