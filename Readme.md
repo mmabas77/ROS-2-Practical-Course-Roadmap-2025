@@ -74,6 +74,11 @@
 **Instructor Resources:**
 - [Gazebo Robot Simulation Setup](https://gazebosim.org/docs/ionic/tutorials/)
 - [Simulating Robots with Gazebo and ROS 2](https://automaticaddison.com/how-to-simulate-a-robot-using-gazebo-and-ros-2/)
+- GUI
+- [Video : Gazebo build your world using building editor](https://youtu.be/pM7jIxXXvFM?si=5aNFwk4vbrQRqaMf)
+- [Video : Gazebo build your Robot using Model Editor part 1](https://youtu.be/xB8tJ9o4eNg?si=1TgZLW6cIuThp1rI)
+- [Video : Gazebo build your Robot using Model Editor part 2](https://youtu.be/qT6Q2syd1M0?si=8mt7AEXkAlP5Hy0E)
+- XML
 - [Video : Simulating Robots with Gazebo and ROS](https://youtu.be/laWn7_cj434?si=AnXetkouMSYBD1J2)
 - [Video : Creating a rough 3D model of our robot with URDF](https://youtu.be/BcjHyhV0kIs?si=CAZnlBHa6--odYt-)
 
