@@ -1,0 +1,47 @@
+# ROS 2 build and install artifacts
+build/
+install/
+log/
+
+# ROS 2 workspace subdirectories
+ros_ws/build/
+ros_ws/install/
+ros_ws/log/
+
+# Python bytecode and cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Python egg info
+*.egg-info/
+*.egg
+
+# Distribution / packaging
+*.whl
+dist/
+.eggs/
+parts/
+sdist/
+develop-eggs/
+.installed.cfg
+
+# VSCode settings
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Test output
+*.log
+
+# Ignore environment files
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
