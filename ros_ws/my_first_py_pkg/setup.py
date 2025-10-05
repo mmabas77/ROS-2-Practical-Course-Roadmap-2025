@@ -24,7 +24,9 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            "test_node = my_first_py_pkg.my_first_node:main"
+            "test_node = my_first_py_pkg.my_first_node:main",
+            "draw_circle = my_first_py_pkg.draw_circle:main",
+            "pose_subscriber = my_first_py_pkg.pose_subscriber:main"
         ],
     },
 )
