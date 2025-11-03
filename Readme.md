@@ -88,18 +88,42 @@
 - Design your own world & BOT (You can import Turtlebot3) - Use Teleopkeys to move the bot.
 ---
 
-### **Session 5: Robot Control & Sensor Integration**
+### **Session 5: TurtleBot3 Simulation with RViz - Camera, LiDAR & Odometry**
 **Goals:**
-- Connect ROS 2 control nodes to Gazebo robot model
-- Configure TurtleBot3 with camera and LiDAR sensors
-- Implement keyboard teleoperation control
+- Set up TurtleBot3 simulation in Gazebo with full sensor suite
+- Use RViz to monitor camera feeds and LiDAR data in real-time
+- Understand odometry concepts and robot pose estimation
+- Implement comprehensive sensor data monitoring and analysis
+
+**Lab Materials:**
+- [Lab 05 Instructions](./05/Readme.md) - Complete hands-on guide
+- Custom TurtleBot3 package with monitoring nodes
+- Pre-configured RViz setup for sensor visualization
+- Odometry analysis and data logging tools
 
 **Instructor Resources:**
-- [Official Docs](https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/)
+- [Official TurtleBot3 Docs](https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/)
+- [ROS 2 RViz User Guide](https://docs.ros.org/en/jazzy/Tutorials/Intermediate/RViz/RViz-User-Guide.html)
+- [Understanding TF2](https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Tf2/Tf2-Main.html)
 - [Video : Getting Started with TurtleBot3 in ROS](https://youtu.be/e-7SlNDh8A8?si=2L79nas9mMkgUDcL)
-- OR
 - [Video : How to use Cameras in ROS (Add camera to the bot)](https://youtu.be/A3nw2M47K50?si=PA1_Z_GUaTtkPCXh)
 - [Video : How to use Lidar in ROS](https://youtu.be/eJZXRncGaGM?si=n-MrKUWUJYSEjMrS)
+
+**Quick Start:**
+```bash
+# Install TurtleBot3 from source (in ros_ws/src)
+cd ros_ws/src
+git clone -b jazzy https://github.com/ROBOTIS-GIT/DynamixelSDK.git
+git clone -b jazzy https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+git clone -b jazzy https://github.com/ROBOTIS-GIT/turtlebot3.git
+cd .. && colcon build --symlink-install
+
+# Set environment and run lab
+export TURTLEBOT3_MODEL=waffle_pi
+export ROS_DOMAIN_ID=30
+./test_lab05.sh
+ros2 launch turtlebot3_lab05 lab05_complete.launch.py
+```
 
 ---
 
