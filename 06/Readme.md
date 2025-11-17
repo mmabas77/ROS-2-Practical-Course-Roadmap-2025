@@ -20,10 +20,10 @@ By completing this lab, students will:
 ## What This Lab Includes
 
 ### Core Components
-- **Gazebo Simulation**: TurtleBot3 Burger robot in TurtleBot3 World
-- **SLAM Toolbox**: Real-time mapping using laser scanner data
+- **Gazebo Simulation**: TurtleBot3 Waffle Pi robot in TurtleBot3 World
+- **SLAM Toolbox**: Real-time mapping using sync SLAM for reliability
 - **RViz Visualization**: Interactive map display and robot tracking
-- **Automatic Lifecycle Management**: SLAM node activation handled automatically
+- **Simplified Lifecycle**: Direct SLAM node startup without complex lifecycle management
 
 ### Key Files
 - `launch/lab06.launch.py`: Main launch file with SLAM integration
@@ -35,11 +35,13 @@ By completing this lab, students will:
 
 ### 1. Set Environment
 ```bash
-export TURTLEBOT3_MODEL=burger
+export TURTLEBOT3_MODEL=waffle_pi
 ```
 
 ### 2. Launch the Lab
 ```bash
+cd /path/to/your/ros_ws
+source install/setup.bash
 ros2 launch turtlebot3_lab06 lab06.launch.py
 ```
 
@@ -47,11 +49,33 @@ ros2 launch turtlebot3_lab06 lab06.launch.py
 In a new terminal:
 ```bash
 source install/setup.bash
-export TURTLEBOT3_MODEL=burger
+export TURTLEBOT3_MODEL=waffle_pi
 ros2 run turtlebot3_teleop teleop_keyboard
 ```
 
-### 4. Explore and Map
+### 4. Activate SLAM (Required!)
+**IMPORTANT**: SLAM Toolbox needs manual activation after launch:
+
+In a new terminal:
+```bash
+source install/setup.bash
+# Configure SLAM Toolbox
+ros2 lifecycle set /slam_toolbox configure
+# Activate SLAM Toolbox
+ros2 lifecycle set /slam_toolbox activate
+```
+
+**Check SLAM Status:**
+```bash
+# Verify SLAM is active
+ros2 lifecycle get /slam_toolbox
+# Should show: active [3]
+
+# Verify map is being published
+ros2 topic echo /map --once
+```
+
+### 5. Explore and Map
 Use keyboard controls to drive the robot around:
 - **w**: forward
 - **s**: backward
@@ -102,13 +126,70 @@ Use keyboard controls to drive the robot around:
 ### SLAM Algorithm
 - Uses **SLAM Toolbox** with Ceres Solver optimization
 - Implements graph-based SLAM with pose graph optimization
-- Configured for educational use with aggressive mapping parameters
+- Configured for educational use with reliable sync SLAM approach
+
+## Sync vs Async SLAM Comparison
+
+This lab uses **Sync SLAM Toolbox** for educational reliability. Here's the comparison:
+
+### Sync SLAM Toolbox (`sync_slam_toolbox_node`)
+✅ **Advantages:**
+- **Deterministic**: Same inputs always produce same outputs
+- **Easier to debug**: Sequential processing, predictable behavior
+- **Educational friendly**: Simpler to understand and troubleshoot
+- **Stable**: Less prone to timing-related issues
+- **Real-time safe**: Guarantees processing within time constraints
+
+⚠️ **Disadvantages:**
+- **Slower processing**: Can't utilize multiple CPU cores for mapping
+- **Higher latency**: Waits for each step to complete before moving to next
+- **Less efficient**: May skip scans if processing takes too long
+
+### Async SLAM Toolbox (`async_slam_toolbox_node`)
+✅ **Advantages:**
+- **Higher performance**: Can utilize multiple CPU cores
+- **Lower latency**: Processes scans in parallel threads
+- **More efficient**: Better resource utilization
+- **Scalable**: Handles high-frequency sensor data better
+
+⚠️ **Disadvantages:**
+- **Non-deterministic**: Same inputs may produce slightly different outputs
+- **Complex debugging**: Multi-threaded processing harder to troubleshoot
+- **Timing sensitive**: Requires careful lifecycle management
+- **Resource intensive**: Uses more CPU and memory
+
+### When to Use Each:
+
+| **Use Sync SLAM When:** | **Use Async SLAM When:** |
+|-------------------------|--------------------------|
+| Learning and education | Production robotics systems |
+| Debugging SLAM issues | High-frequency sensor data (>10Hz) |
+| Limited computational resources | Multi-core systems available |
+| Deterministic results needed | Maximum performance required |
+| Simple robot platforms | Complex autonomous systems |
+
+### Lifecycle Management Requirement
+
+Both sync and async SLAM Toolbox require **lifecycle management**:
+
+```bash
+# Required for BOTH sync and async SLAM
+ros2 lifecycle set /slam_toolbox configure
+ros2 lifecycle set /slam_toolbox activate
+```
+
+**Why lifecycle management?**
+- SLAM Toolbox nodes are **lifecycle nodes** (managed nodes)
+- They start in "unconfigured" state for safety
+- Manual activation ensures controlled startup sequence
+- Prevents SLAM from starting before all sensors are ready
 
 ### Key Parameters
-- **Resolution**: 0.05m per pixel (5cm grid)
-- **Update Rate**: 10Hz for responsive mapping
-- **Scan Range**: Up to 12 meters
+- **Resolution**: 0.05m per pixel (5cm grid) for detailed mapping
+- **Update Rate**: 50Hz transforms, 2Hz map updates for smooth operation
+- **Scan Range**: Up to 12 meters (TurtleBot3 Waffle Pi LDS range)
 - **Loop Closure**: Enabled for map consistency
+- **SLAM Type**: Sync SLAM Toolbox for educational reliability
 
 ### RViz Configuration
 - Fixed Frame: `odom` (prevents "Fixed Frame does not exist" errors)
@@ -136,21 +217,40 @@ Use keyboard controls to drive the robot around:
 ## Troubleshooting
 
 ### "No map received" in RViz
-- **Fixed**: SLAM Toolbox lifecycle node is automatically activated
-- If issue persists, manually run: `ros2 lifecycle set /slam_toolbox configure && ros2 lifecycle set /slam_toolbox activate`
+- **Most Common Issue**: SLAM Toolbox not activated
+- **Solution**: Manually activate SLAM:
+  ```bash
+  ros2 lifecycle set /slam_toolbox configure
+  ros2 lifecycle set /slam_toolbox activate
+  ```
+- **Check SLAM state**: `ros2 lifecycle get /slam_toolbox` should show `active [3]`
+- **Verify map topic**: `ros2 topic echo /map --once` should show map data
+
+### SLAM node not starting
+- **Check if node exists**: `ros2 node list | grep slam_toolbox`
+- **Check lifecycle state**: `ros2 lifecycle get /slam_toolbox`
+- **Expected states**: unconfigured [1] → inactive [2] → active [3]
+- **If stuck in unconfigured**: Run configure and activate commands above
 
 ### Robot not responding to teleop
-- Check TurtleBot3 model: `echo $TURTLEBOT3_MODEL` should show "burger"
+- Check TurtleBot3 model: `echo $TURTLEBOT3_MODEL` should show "waffle_pi"
 - Ensure teleop is sourced: `source install/setup.bash` in teleop terminal
+- Verify cmd_vel topic: `ros2 topic list | grep cmd_vel`
 
 ### Map not updating
 - Move the robot - SLAM needs motion to build maps
 - Check `/scan` topic: `ros2 topic echo /scan --once`
-- Verify laser scanner is working in Gazebo
+- Verify laser scanner is working in Gazebo (red laser lines visible)
 
 ### RViz frame errors
 - RViz Fixed Frame is set to `odom` (not `map`) to prevent startup errors
-- TF tree: `ros2 run tf2_tools view_frames.py` to debug frame issues
+- TF tree: `ros2 run tf2_tools view_frames` to debug frame issues
+- Ensure TurtleBot3 model is set correctly for proper frame publishing
+
+### Launch file errors
+- **Fixed**: Removed complex lifecycle management that was causing failures
+- **Fixed**: Added automatic TURTLEBOT3_MODEL environment variable setting
+- If package not found, ensure workspace is built: `colcon build --packages-select turtlebot3_lab06`
 
 ## Extension Ideas
 

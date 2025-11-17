@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
 TurtleBot3 Lab06 - SLAM Implementation
-Direct SLAM launch file using workspace TurtleBot3 packages with lifecycle management
+SLAM launch file using workspace TurtleBot3 packages - Fixed Version
 """
 
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, TimerAction, ExecuteProcess
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
@@ -27,6 +27,12 @@ def generate_launch_description():
         description='Use simulation clock'
     )
 
+    # Set TurtleBot3 model environment variable
+    set_turtlebot3_model = SetEnvironmentVariable(
+        'TURTLEBOT3_MODEL',
+        'waffle_pi'
+    )
+
     # TurtleBot3 World Launch (from workspace)
     gazebo_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
@@ -35,10 +41,10 @@ def generate_launch_description():
         launch_arguments={'use_sim_time': use_sim_time}.items()
     )
 
-    # SLAM Toolbox Node
+    # SLAM Toolbox Node - Using sync version for more reliable operation
     slam_toolbox_node = Node(
         package='slam_toolbox',
-        executable='async_slam_toolbox_node',
+        executable='sync_slam_toolbox_node',
         name='slam_toolbox',
         output='screen',
         parameters=[
@@ -57,35 +63,10 @@ def generate_launch_description():
         output='screen'
     )
 
-    # Lifecycle management - configure SLAM Toolbox after startup
-    configure_slam = TimerAction(
-        period=5.0,  # Wait 5 seconds for node to start
-        actions=[
-            ExecuteProcess(
-                cmd=['ros2', 'lifecycle', 'set', '/slam_toolbox', 'configure'],
-                output='screen',
-                shell=True
-            )
-        ]
-    )
-
-    # Lifecycle management - activate SLAM Toolbox after configuration
-    activate_slam = TimerAction(
-        period=7.0,  # Wait 7 seconds total
-        actions=[
-            ExecuteProcess(
-                cmd=['ros2', 'lifecycle', 'set', '/slam_toolbox', 'activate'],
-                output='screen',
-                shell=True
-            )
-        ]
-    )
-
     return LaunchDescription([
         declare_use_sim_time_cmd,
+        set_turtlebot3_model,
         gazebo_launch,
         slam_toolbox_node,
         rviz_node,
-        configure_slam,
-        activate_slam,
     ])
