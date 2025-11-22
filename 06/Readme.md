@@ -59,6 +59,10 @@ ros2 run turtlebot3_teleop teleop_keyboard
 In a new terminal:
 ```bash
 source install/setup.bash
+ros2 node list
+ros2 node info /slam_toolbox
+ros2 lifecycle get /slam_toolbox
+
 # Configure SLAM Toolbox
 ros2 lifecycle set /slam_toolbox configure
 # Activate SLAM Toolbox
